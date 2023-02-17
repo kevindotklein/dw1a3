@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+
+:root{
+    --content-margin-left: 10px;
+    --content-margin-top: 50px;
+    --header-width: 250px;
+    --header-margin-top: 20px;
+    --tasks-margin-top: 15px;
+    --link-color: #268beb;
+    --footer-margin-right: 30px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: #f0f4fa;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 100%;
+    margin-top: var(--header-margin-top);
+}
+
+.header > h2{
+    width: var(--header-width);
+    text-align: center;
+}
+
+.name{
+    margin-top: 10px;
+    width: var(--header-width);
+    word-wrap: normal;
+    text-align: center;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    height: 80%;
+    margin-top: var(--content-margin-top);
+}
+
+section{
+    width: 25%;
+    height: 300px;
+}
+
+section > h3{
+    text-align: center;
+}
+
+li{
+    list-style-type: none;
+    text-align: center;
+    margin-top: var(--tasks-margin-top);
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    color: var(--link-color);
+}
+
+.footer{
+    text-align: end;
+    margin-right: var(--footer-margin-right);
+}
