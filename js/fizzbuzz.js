@@ -30,5 +30,34 @@ const array2pair = (arr) => {
     return result;
 }
 
-xs = array2pair([1,2,3]);
-console.log(xs);
+const range = (start) => (end) => 
+    start > end ? null : pair (start) (range (start+1) (end));
+
+const mapf = (f) => (xs) => 
+    xs === null ? null
+    : pair (f (head(xs))) (mapf (f) (tail (xs)));
+
+const fizzbuzz = (n) =>
+    ((n % 3 === 0 ? 'Fizz' : '') + (n % 5 === 0 ? 'Buzz' : '')) || n; //empty string == false in js
+
+const btn = document.getElementById("submit");
+
+btn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    let startRange = document.getElementById("start").value;
+    
+    let endRange = document.getElementById("end").value;
+
+    let result = pair2array(mapf (fizzbuzz) (range (parseInt(startRange)) (parseInt(endRange))));
+
+    document.getElementById("result").innerHTML = result.join(" ");
+
+})
+
+const source = document.getElementById("source");
+
+source.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "https://github.com/kevindotklein/dw1a3/blob/main/js/fizzbuzz.js";
+})
