@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;600;800&display=swap');
+
+:root{
+    --bg-color: #f0f4fa;
+    --header-color: #4b3ce8;
+    --link-color: #268beb;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover{
+    color: var(--link-color);
+}
+
+header{
+    text-align: center;
+    background: var(--header-color);
+    padding: 3rem;
+}
+
+header h1{
+    font-weight: 300;
+    color: #fff;
+}
+
+main{
+    width: 80vw;
+    height: 70%;
+    margin: auto;
+}
+
+.projects-label{
+    font-weight: 300;
+    font-size: 24px;
+    margin: 15px 0 20px;
+}
+
+.project-name{
+    font-size: 20px;
+}
+
+article ul li{
+    list-style-type: none;
+    padding-left: 45px;
+    background-image: url('./assets/arrow.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-bottom: 25px;
+}
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+
+.email-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.email{
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.github{
+    margin-left: auto;
+}
+
+
