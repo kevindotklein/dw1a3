@@ -1,0 +1,29 @@
+:root{
+    --green: #92fd37;
+    --light-green: #bcfe83;
+    --purple: #6d02c8;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Rubik', sans-serif;
+    background: var(--light-green);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1{
+    color: var(--purple);
+    text-align: center;
+}
+
+#canvas{
+    box-shadow: 10px 10px 15px black;
+    
+}
