@@ -4,8 +4,20 @@ export default class Player{
         this.y = y;
     }
 
-    static moveUp(){
-        
+    moveUp(){
+        this.y--;    
+    }
+
+    moveDown(){
+        this.y++;
+    }
+
+    moveLeft(){
+        this.x--;
+    }
+
+    moveRight(){
+        this.x++;
     }
 
 }
