@@ -10,8 +10,11 @@ const player = new Player(2,10);
 
 let acceptMove = true;
 
+let allowedTiles = [0];
+
 const update = () => {
     tileMap.draw(canvas, ctx, player);
+
     window.addEventListener('keydown', (e) => {
         
         if(acceptMove == true){
@@ -19,30 +22,44 @@ const update = () => {
                 
                 case 'w':
                 case 'ArrowUp':
-                    tileMap.map[player.y][player.x] = 0;
-                    player.moveUp();
+                    if(player.y-1<0) break;
+                    if(allowedTiles.includes(tileMap.map[player.y-1][player.x]) && player.y >= 0){
+                        tileMap.map[player.y][player.x] = 0;
+                        player.moveUp();
+                    }
                     acceptMove = false;
+                    player.direction = 1;
                     break;
-
+                    
                 case 's':
                 case 'ArrowDown':
-                    tileMap.map[player.y][player.x] = 0;
-                    player.moveDown();
+                    if(player.y+1>=tileMap.map.length) break;
+                    if(allowedTiles.includes(tileMap.map[player.y+1][player.x]) && player.y < tileMap.map.length){
+                        tileMap.map[player.y][player.x] = 0;
+                        player.moveDown();
+                    }
                     acceptMove = false;
+                    player.direction = 3;
                     break;
 
                 case 'a':
                 case 'ArrowLeft':
-                    tileMap.map[player.y][player.x] = 0;
-                    player.moveLeft();
+                    if(allowedTiles.includes(tileMap.map[player.y][player.x-1]) && player.x >= 0){
+                        tileMap.map[player.y][player.x] = 0;
+                        player.moveLeft();
+                    }
                     acceptMove = false;
+                    player.direction = 4;
                     break;
 
                 case 'd':
                 case 'ArrowRight':
-                    tileMap.map[player.y][player.x] = 0;
-                    player.moveRight();
+                    if(allowedTiles.includes(tileMap.map[player.y][player.x+1]) && player.x < tileMap.map[0].length){
+                        tileMap.map[player.y][player.x] = 0;
+                        player.moveRight();
+                    }
                     acceptMove = false;
+                    player.direction = 2;
                     break;
 
                 default:
