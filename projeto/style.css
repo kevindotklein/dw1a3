@@ -13,8 +13,6 @@
 body{
     font-family: 'Rubik', sans-serif;
     background: var(--light-green);
-    display: flex;
-    justify-content: center;
     height: 100vh;
 }
 
@@ -23,7 +21,24 @@ h1{
     text-align: center;
 }
 
+#canvas-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
 #canvas{
     box-shadow: 10px 10px 15px black;
-    
+    max-width: 640px;
+    margin: auto;
+}
+
+input[type="button"]{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 10px;
+}
+
+input[type="button"]:first-of-type{
+    margin-top: 30px;
 }

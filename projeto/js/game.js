@@ -6,11 +6,32 @@ const ctx = canvas.getContext('2d');
 const tileSize = 32;
 
 const tileMap = new TileMap(tileSize);
-const player = new Player(2,10);
+const player = new Player(2,2);
 
 let acceptMove = true;
 
 let allowedTiles = [0];
+
+//test
+
+const b1 = document.querySelector('#b1');
+const b2 = document.querySelector('#b2');
+
+b1.addEventListener('click', (e) => {
+    tileMap.map[player.y][player.x] = 0;
+    player.x = 2;
+    player.y = 2;
+    tileMap.map = tileMap.maps[0];
+});
+
+b2.addEventListener('click', (e) => {
+    tileMap.map[player.y][player.x] = 0;
+    player.x = 5;
+    player.y = 5;
+    tileMap.map = tileMap.maps[1];
+});
+
+//
 
 const update = () => {
     tileMap.draw(canvas, ctx, player);
