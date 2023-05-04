@@ -1,6 +1,9 @@
 const newTransaction = document.getElementById('new-transaction');
 const cancelNewTransaction = document.getElementById('cancel-new-transaction');
 const form = document.querySelector('form');
+const cancelDeleteTransaction = document.getElementById('cancel-delete-transaction');
+const deleteTransaction = document.querySelector('.button.cancel.delete-transaction');
+var deleteIndex;
 
 newTransaction.addEventListener('click', (e) => {
     Modal.open();
@@ -10,17 +13,39 @@ cancelNewTransaction.addEventListener('click', (e) => {
     Modal.close();
 });
 
+cancelDeleteTransaction.addEventListener('click', (e) => {
+    DeleteModal.close();
+});
+
 form.addEventListener('submit', (e) => {
     Form.submit(e);
 });
 
+        
+deleteTransaction.addEventListener('click', (e) => {
+    Transaction.remove(deleteIndex);
+    DeleteModal.close();
+});
+
 const Modal = {
     open: () => {
-        document.querySelector('.modal-overlay').classList.add('active');
+        document.querySelector('.modal-overlay:first-of-type').classList.add('active');
     },
 
     close: () => {
-        document.querySelector('.modal-overlay').classList.remove('active');
+        document.querySelector('.modal-overlay:first-of-type').classList.remove('active');
+    }
+}
+
+const DeleteModal = {
+
+    open: (index) => {
+        document.querySelector('.modal-overlay:last-of-type').classList.add('active');
+        deleteIndex = index;
+    },
+
+    close: () => {
+        document.querySelector('.modal-overlay:last-of-type').classList.remove('active');
     }
 }
 
@@ -101,7 +126,7 @@ const DOM = {
             <td class="${style}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-                <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="remove transaction">
+                <img onclick="DeleteModal.open(${index})" src="./assets/minus.svg" alt="remove transaction">
             </td>        
         `
 

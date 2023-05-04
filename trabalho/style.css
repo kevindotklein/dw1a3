@@ -27,6 +27,10 @@ header{
     background: var(--header-color);
     padding: 2rem 0 10rem;
     text-align: center;
+    font-weight: lighter;
+    font-size: 24px;
+    border-radius: 0 0 40px 40px;
+    border: 2px solid var(--dark-purple);
 }
 
 #logo{
@@ -123,6 +127,7 @@ button:hover{
     border-radius: .45rem;
     margin-bottom: 2rem;
     color: var(--dark-purple);
+    border: 2px solid var(--dark-purple);
 }
 
 .card h3{
@@ -230,6 +235,19 @@ td.expense{
 
     position: relative;
     z-index: 1;
+}
+
+.modal.delete{
+    width: 500px;
+    height: 100px;
+    padding: 5rem;
+    text-align: center;
+}
+
+.modal.delete a:hover{
+    cursor: pointer;
+    background: var(--expense-color);
+    color: #fff;
 }
 
 #form{
