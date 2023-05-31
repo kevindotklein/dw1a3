@@ -7,6 +7,8 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const tileSize = 32;
 
+const levelDisplay = document.getElementById('level');
+
 const tileMap = new TileMap(tileSize);
 const player = new Player(8, 13);
 
@@ -16,43 +18,102 @@ const allowedTiles = [0, 4];
 
 var currLevel = 1;
 
-const boxes = [
+const boxes = [];/* = [
     new Box(5, 6),
     new Box(14, 6),
     new Box(18, 5),
     new Box(17, 9)
-];
+];*/
 
 //TODO: check box direction to set ok
-const goals = [
+const goals = [];/* = [
     new Goal(1, 1),
     new Goal(4, 1),
     new Goal(15, 1),
     new Goal(18, 1)
-];
+];*/
 
 //test
+
+
+const setLevel = (level=1, player, boxes, goals) => {
+    switch(level){
+
+        default:
+        case 1:
+            tileMap.map = tileMap.maps[0];
+            player.x = 8;
+            player.y = 13;
+            boxes.push(new Box(5, 6));
+            boxes.push(new Box(14, 6));
+            boxes.push(new Box(18, 5));
+            boxes.push(new Box(17, 9));
+            goals.push(new Goal(1, 1));
+            goals.push(new Goal(4, 1));
+            goals.push(new Goal(15, 1));
+            goals.push(new Goal(18, 1));
+            break;
+        
+        case 2:
+            tileMap.map = tileMap.maps[1];
+            player.x = 8;
+            player.y = 13;
+            boxes.push(new Box(3, 9));
+            boxes.push(new Box(3, 10));
+            boxes.push(new Box(8, 6));
+            boxes.push(new Box(10, 6));
+            boxes.push(new Box(15, 6));
+            boxes.push(new Box(16, 4));
+            goals.push(new Goal(2, 1));
+            goals.push(new Goal(3, 1));
+            goals.push(new Goal(16, 1));
+            goals.push(new Goal(17, 1));
+            goals.push(new Goal(9, 7));
+            goals.push(new Goal(10, 7));
+            break;
+    }
+}
+
+const resetAllObjects = () => {
+    tileMap.map[player.y][player.x] = 0;
+    for(let i=0; i<boxes.length; i++){
+        tileMap.map[boxes[i].y][boxes[i].x] = 0;
+    }
+    for(let i=0; i<goals.length; i++){
+        tileMap.map[goals[i].y][goals[i].x] = 0;
+    }
+    boxes.splice(0, boxes.length);
+    goals.splice(0, goals.length);
+}
 
 const b1 = document.querySelector('#b1');
 const b2 = document.querySelector('#b2');
 
+setLevel(1, player, boxes, goals);
+
 b1.addEventListener('click', (e) => {
-    tileMap.map[player.y][player.x] = 0;
-    player.x = 8;
-    player.y = 13;
-    tileMap.map = tileMap.maps[0];
+    currLevel = 1;
+    document.activeElement.blur();
+    resetAllObjects();
+    setLevel(1, player, boxes, goals);
 });
 
 b2.addEventListener('click', (e) => {
-    tileMap.map[player.y][player.x] = 0;
-    player.x = 5;
-    player.y = 5;
-    tileMap.map = tileMap.maps[1];
+    currLevel = 2;
+    document.activeElement.blur();
+    resetAllObjects();
+    setLevel(2, player, boxes, goals);
 });
 
 //
 
+const refreshLevelDisplay = () => {
+    levelDisplay.innerHTML = `LEVEL ${currLevel}`;
+}
+
 const update = () => {
+
+    refreshLevelDisplay();
 
     for(let i=0; i<goals.length; i++){
         for(let j=0; j<boxes.length; j++){
@@ -187,5 +248,6 @@ const update = () => {
         }
     })
 }
+
 
 setInterval(update, 1000/15);

@@ -48,3 +48,9 @@ input[type="button"]{
 input[type="button"]:first-of-type{
     margin-top: 30px;
 }
+
+#level {
+    color: #fff;
+    text-align: center;
+    margin: -15px 0 15px;
+}
