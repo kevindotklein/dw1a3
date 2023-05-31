@@ -1,19 +1,35 @@
 import TileMap from "./tilemap.js";
 import Player from "./player.js";
 import Box from "./box.js";
+import Goal from "./goal.js";
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const tileSize = 32;
 
 const tileMap = new TileMap(tileSize);
-const player = new Player(2,2);
+const player = new Player(8, 13);
 
 let acceptMove = true;
 
-const allowedTiles = [0];
+const allowedTiles = [0, 4];
 
-const boxes = [new Box(10,2)];
+var currLevel = 1;
+
+const boxes = [
+    new Box(5, 6),
+    new Box(14, 6),
+    new Box(18, 5),
+    new Box(17, 9)
+];
+
+//TODO: check box direction to set ok
+const goals = [
+    new Goal(1, 1),
+    new Goal(4, 1),
+    new Goal(15, 1),
+    new Goal(18, 1)
+];
 
 //test
 
@@ -21,10 +37,9 @@ const b1 = document.querySelector('#b1');
 const b2 = document.querySelector('#b2');
 
 b1.addEventListener('click', (e) => {
-    boxes = [new Box(10,2)];
     tileMap.map[player.y][player.x] = 0;
-    player.x = 2;
-    player.y = 2;
+    player.x = 8;
+    player.y = 13;
     tileMap.map = tileMap.maps[0];
 });
 
@@ -38,6 +53,16 @@ b2.addEventListener('click', (e) => {
 //
 
 const update = () => {
+
+    for(let i=0; i<goals.length; i++){
+        for(let j=0; j<boxes.length; j++){
+
+            if(goals[i].x === boxes[j].x && goals[i].y === boxes[j].y && boxes[j].direction === 0){
+                goals[i].ok = true;
+            }
+
+        }
+    }
 
     for(let i=0; i<boxes.length; i++){
         switch(boxes[i].direction){
@@ -85,7 +110,7 @@ const update = () => {
         }
     }
 
-    tileMap.draw(canvas, ctx, player, boxes);
+    tileMap.draw(canvas, ctx, player, boxes, goals);
 
     window.addEventListener('keydown', (e) => {
         

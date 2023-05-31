@@ -9,25 +9,28 @@ export default class TileMap{
         this.playerRightSprite = this.#sprite('./assets/playerRight.png');
         this.voidSprite = this.#sprite('./assets/void.png');
         this.boxSprite = this.#sprite('./assets/box.png');
+        this.goalSprite = this.#sprite('./assets/goal.png');
     }
 
     maps = [
+        //boxes = (5,6), (14,6), (18,5), (17,9)
+        //goals = (1,1), (4,1), (15,1), (18,1)
         [
+            [1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
+            [1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+            [0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [1,1,0,1,1,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1],
-            [1,1,0,1,1,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1],
-            [1,1,0,1,1,1,0,1,1,0,0,0,1,1,1,1,1,1,1,1],
-            [1,1,0,1,1,1,0,0,1,0,0,0,1,1,0,1,1,1,1,1],
-            [1,1,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,1,1],
-            [1,1,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,1,1],
-            [1,1,0,1,1,1,1,1,1,0,0,1,1,1,0,0,1,1,1,1],
-            [1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
-            [1,1,0,1,1,1,1,1,1,0,1,0,1,0,0,0,1,1,1,1],
-            [1,1,0,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1],
-            [1,1,0,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1],
-            [1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
+            [0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+            [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         ],
 
 
@@ -58,10 +61,10 @@ export default class TileMap{
 
     map = this.maps[0];
 
-    draw(canvas, ctx, player, boxes){
+    draw(canvas, ctx, player, boxes, goals){
         this.#setCanvasSize(canvas);
         this.#clearCanvas(canvas, ctx);
-        this.#drawMap(ctx, player, boxes);
+        this.#drawMap(ctx, player, boxes, goals);
     }
 
     #setCanvasSize(canvas){
@@ -74,13 +77,18 @@ export default class TileMap{
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    #drawMap(ctx, player, boxes){
-        if(this.map[player.y][player.x] == 0){
-            this.map[player.y][player.x] = 2; 
+    #drawMap(ctx, player, boxes, goals){
+        
+        for(let i=0; i<goals.length; i++){
+            this.map[goals[i].y][goals[i].x] = 4;
         }
         
         for(let i=0; i<boxes.length; i++){
             this.map[boxes[i].y][boxes[i].x] = 3;
+        }
+
+        if(this.map[player.y][player.x] == 0 || this.map[player.y][player.x] == 4){
+            this.map[player.y][player.x] = 2; 
         }
 
 
@@ -125,6 +133,10 @@ export default class TileMap{
 
                     case 3:
                         image = this.boxSprite;
+                        break;
+
+                    case 4:
+                        image = this.goalSprite;
                         break;
 
                     default:
