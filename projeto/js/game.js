@@ -13,9 +13,7 @@ let acceptMove = true;
 
 const allowedTiles = [0];
 
-const boxes = [
-    new Box(10, 2),
-];
+const boxes = [new Box(10,2)];
 
 //test
 
@@ -23,7 +21,7 @@ const b1 = document.querySelector('#b1');
 const b2 = document.querySelector('#b2');
 
 b1.addEventListener('click', (e) => {
-
+    boxes = [new Box(10,2)];
     tileMap.map[player.y][player.x] = 0;
     player.x = 2;
     player.y = 2;

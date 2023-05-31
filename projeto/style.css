@@ -1,7 +1,7 @@
 :root{
-    --green: #92fd37;
-    --light-green: #bcfe83;
-    --purple: #6d02c8;
+    --yellow: #fadf0c;
+    --green: #2eff2e;
+    --orange: #ff4910;
 }
 
 *{
@@ -12,12 +12,14 @@
 
 body{
     font-family: 'Rubik', sans-serif;
-    background: var(--light-green);
+    background: #000;
     height: 100vh;
 }
 
 h1{
-    color: var(--purple);
+    color: #fff;
+    margin: 40px 0;
+    font-weight: bolder;
     text-align: center;
 }
 
@@ -27,7 +29,7 @@ h1{
 }
 
 #canvas{
-    box-shadow: 10px 10px 15px black;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     max-width: 640px;
     margin: auto;
 }
@@ -37,6 +39,10 @@ input[type="button"]{
     flex-direction: row;
     margin: auto;
     margin-top: 10px;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border: none;
 }
 
 input[type="button"]:first-of-type{
