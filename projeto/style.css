@@ -54,3 +54,12 @@ input[type="button"]:first-of-type{
     text-align: center;
     margin: -15px 0 15px;
 }
+
+.reset{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}

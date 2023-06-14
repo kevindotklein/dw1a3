@@ -96,7 +96,19 @@ const resetAllObjects = () => {
 // const b3 = document.querySelector('#b3');
 // const b4 = document.querySelector('#b4');
 
+const reset = document.querySelector('.reset');
+
 setLevel(1, player, boxes, goals);
+
+reset.addEventListener('click', (e) => {
+    if(currLevel == 4){
+        currLevel = 1;
+        resetAllObjects();
+        setLevel(currLevel, player, boxes, goals);
+    }
+    resetAllObjects();
+    setLevel(currLevel, player, boxes, goals);
+})
 
 // b1.addEventListener('click', (e) => {
 //     currLevel = 1;
