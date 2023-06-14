@@ -18,22 +18,9 @@ const allowedTiles = [0, 4];
 
 var currLevel = 1;
 
-const boxes = [];/* = [
-    new Box(5, 6),
-    new Box(14, 6),
-    new Box(18, 5),
-    new Box(17, 9)
-];*/
+const boxes = [];
 
-//TODO: check box direction to set ok
-const goals = [];/* = [
-    new Goal(1, 1),
-    new Goal(4, 1),
-    new Goal(15, 1),
-    new Goal(18, 1)
-];*/
-
-//test
+const goals = [];
 
 
 const setLevel = (level=1, player, boxes, goals) => {
@@ -71,6 +58,24 @@ const setLevel = (level=1, player, boxes, goals) => {
             goals.push(new Goal(9, 7));
             goals.push(new Goal(10, 7));
             break;
+
+        case 3:
+            tileMap.map = tileMap.maps[2];
+            player.x = 10;
+            player.y = 7;
+            boxes.push(new Box(9,7));
+            boxes.push(new Box(10,8));
+            boxes.push(new Box(9,13));
+            boxes.push(new Box(1,8));
+            goals.push(new Goal(10,13));
+            goals.push(new Goal(1,7));
+            goals.push(new Goal(18,9));
+            goals.push(new Goal(1,2));
+            break;
+        
+        case 4:
+            tileMap.map = tileMap.maps[3];
+            break;
     }
 }
 
@@ -86,34 +91,73 @@ const resetAllObjects = () => {
     goals.splice(0, goals.length);
 }
 
-const b1 = document.querySelector('#b1');
-const b2 = document.querySelector('#b2');
+// const b1 = document.querySelector('#b1');
+// const b2 = document.querySelector('#b2');
+// const b3 = document.querySelector('#b3');
+// const b4 = document.querySelector('#b4');
 
 setLevel(1, player, boxes, goals);
 
-b1.addEventListener('click', (e) => {
-    currLevel = 1;
-    document.activeElement.blur();
-    resetAllObjects();
-    setLevel(1, player, boxes, goals);
-});
+// b1.addEventListener('click', (e) => {
+//     currLevel = 1;
+//     document.activeElement.blur();
+//     resetAllObjects();
+//     setLevel(1, player, boxes, goals);
+// });
 
-b2.addEventListener('click', (e) => {
-    currLevel = 2;
-    document.activeElement.blur();
-    resetAllObjects();
-    setLevel(2, player, boxes, goals);
-});
+// b2.addEventListener('click', (e) => {
+//     currLevel = 2;
+//     document.activeElement.blur();
+//     resetAllObjects();
+//     setLevel(2, player, boxes, goals);
+// });
 
-//
+// b3.addEventListener('click', (e) => {
+//     currLevel = 3;
+//     document.activeElement.blur();
+//     resetAllObjects();
+//     setLevel(3, player, boxes, goals);
+// });
+
+// b4.addEventListener('click', (e) => {
+//     currLevel = 4;
+//     document.activeElement.blur();
+//     resetAllObjects();
+//     setLevel(4, player, boxes, goals);
+// })
 
 const refreshLevelDisplay = () => {
+    if(currLevel == 4){
+        levelDisplay.innerHTML = `CONGRATS`;
+        levelDisplay.style.color = "#2eff2e";
+        return;
+    }
+    levelDisplay.style.color = "#fff";
     levelDisplay.innerHTML = `LEVEL ${currLevel}`;
+}
+
+const checkComplete = () => {
+    if(goals.length >= 1){
+        let count = 0;
+        for(let i=0; i<goals.length; i++){
+            if(goals[i].ok)
+                count++;
+        }
+
+        if(count === goals.length && currLevel < 4){
+            currLevel++;
+            document.activeElement.blur();
+            resetAllObjects();
+            setLevel(currLevel, player, boxes, goals);
+        }
+    }
+    
 }
 
 const update = () => {
 
     refreshLevelDisplay();
+    checkComplete();
 
     for(let i=0; i<goals.length; i++){
         for(let j=0; j<boxes.length; j++){
